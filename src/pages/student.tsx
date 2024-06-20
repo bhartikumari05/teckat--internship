@@ -1,25 +1,24 @@
 import React, { useEffect, useState } from "react";
-import{ IStudent } from "../interface/student.ts";
+import{ IStudent } from "../interface/student";
 import { Link } from "react-router-dom";
 
-
+import './Student.scss';
 const Students: React.FC = () => {
+
   const [allStudents, setAllStudents ] = useState<IStudent[]>();
-  useEffect(() => {
-    const students: IStudent[] | undefined = JSON.parse(
-      localStorage.getItem("students") as string 
-    );
-    console.log(students);
-    setAllStudents(students);
-  }, []);
+  useEffect(()=>{
+    const student = JSON.parse(localStorage.getItem("students")as string);
+    setAllStudents(student)
+console.log("student data",allStudents);
+  },[]);
+
+
+ 
   return( 
   <> 
-  <button title="Create Student">
+  <button title="Create Student" className ="create_button">
     <Link to="/student/create-student">Create Student</Link>
-  </button>
-  <br />
-      <hr />
-      <table>
+  </button><table>
         <thead>
           <tr>
             <td>SN.</td>
@@ -43,6 +42,9 @@ const Students: React.FC = () => {
           })}
         </tbody>
       </table>
+  <br />
+      <hr />
+     
     </>
   );
 };
